@@ -26,7 +26,7 @@ export const fetchUsers = createAsyncThunk<
   { rejectValue: string }
 >('users/fetch', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get('https://dummyjson.com/users');
+    const response = await axios.get('https://dummyjson.com/users?limit=0');
     return response.data.users;
   } catch (err) {
     if (axios.isAxiosError(err)) {
