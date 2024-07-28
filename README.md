@@ -56,7 +56,6 @@ The attached mockup image has been referred to guide the UI development 👇
 - [ ] API Request Failures (Display user-friendly messages)
 - [x] No Results after applying Filters
 - [ ] Invalid Fields in API Response
-- [ ] Network Connectivity Issues (Implement Retry Mechanism)
 - [x] General API Fetch Error Handling
 
 ## Minor Detailing
