@@ -10,6 +10,7 @@ interface UserState {
     city: string;
     name: string;
   };
+  highlight: boolean;
 }
 
 interface User {
@@ -22,6 +23,8 @@ interface User {
     city: string;
     state: string;
   };
+  age: number;
+  isOldest?: boolean;
 }
 
 const initialState: UserState = {
@@ -33,6 +36,7 @@ const initialState: UserState = {
     city: '',
     name: '',
   },
+  highlight: false,
 };
 
 export const fetchUsers = createAsyncThunk<
@@ -87,40 +91,22 @@ const userSlice = createSlice({
       state.currentFilters.name = action.payload;
       userSlice.caseReducers.applyFilters(state);
     },
-
-    // cityFilter: (state, action: PayloadAction<string>) => {
-    //   if (action.payload === '' || action.payload === 'All Cities') {
-    //     state.searchResults = state.userData;
-    //   } else {
-    //     state.searchResults = state.userData.filter(
-    //       (user) => user.address.city === action.payload
-    //     );
-    //   }
-    // },
-    // nameFilter: (state, action: PayloadAction<string>) => {
-    //   if (action.payload === '') {
-    //     // Reapply the current city filter instead of resetting to all data
-    //     const currentCity =
-    //       state.searchResults.length > 0
-    //         ? state.searchResults[0].address.city
-    //         : '';
-
-    //     if (currentCity && currentCity !== 'All Cities') {
-    //       state.searchResults = state.userData.filter(
-    //         (user) => user.address.city === currentCity
-    //       );
-    //     } else {
-    //       state.searchResults = state.userData;
-    //     }
-    //   } else {
-    //     const searchTerm = action.payload.toLowerCase();
-    //     state.searchResults = state.searchResults.filter(
-    //       (user) =>
-    //         user.firstName.toLowerCase().includes(searchTerm) ||
-    //         user.lastName.toLowerCase().includes(searchTerm)
-    //     );
-    //   }
-    // },
+    toggleHighlight: (state) => {
+      state.highlight = !state.highlight;
+    },
+    calculateOldestPerCity: (state) => {
+      const oldestPerCity: Record<string, number> = {};
+      state.searchResults.forEach((user) => {
+        const city = user.address.city;
+        if (!oldestPerCity[city] || user.age > oldestPerCity[city]) {
+          oldestPerCity[city] = user.age;
+        }
+      });
+      state.searchResults = state.searchResults.map((user) => ({
+        ...user,
+        isOldest: user.age === oldestPerCity[user.address.city],
+      }));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -142,4 +128,9 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { cityFilter, nameFilter } = userSlice.actions;
+export const {
+  cityFilter,
+  nameFilter,
+  toggleHighlight,
+  calculateOldestPerCity,
+} = userSlice.actions;

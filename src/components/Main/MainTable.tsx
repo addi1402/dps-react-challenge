@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { calculateOldestPerCity } from '@/redux/slices/userSlice';
 
 interface User {
   image: string | undefined;
@@ -22,10 +23,20 @@ interface User {
     state: string;
   };
   birthDate: string;
+  isOldest?: boolean;
 }
 
 const MainTable: React.FC = () => {
-  const { searchResults } = useSelector((state: RootState) => state.users);
+  const { searchResults, highlight } = useSelector(
+    (state: RootState) => state.users
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (highlight) {
+      dispatch(calculateOldestPerCity());
+    }
+  }, [dispatch, highlight]);
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -52,7 +63,12 @@ const MainTable: React.FC = () => {
       </TableHeader>
       <TableBody>
         {searchResults.map((user: User) => (
-          <TableRow key={user.id}>
+          <TableRow
+            key={user.id}
+            className={
+              highlight && user.isOldest ? 'bg-yellow-50' : 'bg-inherit'
+            }
+          >
             <TableCell className="font-medium">{user.id}</TableCell>
             <TableCell className="font-medium">
               <Avatar className="w-6 h-auto">
