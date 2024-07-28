@@ -4,7 +4,7 @@ import UserTable from './components/UserTable';
 
 export default function App() {
   return (
-    <div id="container" className="flex flex-col place-items-center h-full">
+    <div id="container" className="flex flex-col place-items-center">
       <DPSLogo />
       <UserTable />
     </div>
