@@ -36,7 +36,7 @@ export default function MainTable() {
       <TableCaption>
         {searchResults.length > 0 ? (
           <>
-            Results Found: <span>{searchResults.length}</span>
+            Found <span>{searchResults.length}</span> Results
           </>
         ) : (
           'No Results Found'
@@ -44,9 +44,8 @@ export default function MainTable() {
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[50px]">ID</TableHead>
-          <TableHead>Image</TableHead>
-          <TableHead>Name</TableHead>
+          <TableHead>ID</TableHead>
+          <TableHead>Customer</TableHead>
           <TableHead>City</TableHead>
           <TableHead>State</TableHead>
           <TableHead>Birthday</TableHead>

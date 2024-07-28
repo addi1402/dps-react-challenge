@@ -1,5 +1,4 @@
 import { TableCell, TableRow } from '@/components/ui/table';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import User from '@/types/User';
 import DataBodyProps from '@/types/Data';
 
@@ -8,7 +7,7 @@ function formatDate(dateString: string): string {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
-  return `${day}.${month}.${year}`;
+  return `${day}/${month}/${year}`;
 }
 
 export default function DataBody({ searchResults, highlight }: DataBodyProps) {
@@ -18,18 +17,15 @@ export default function DataBody({ searchResults, highlight }: DataBodyProps) {
         <TableRow
           key={user.id}
           className={`transition-colors duration-300 ${
-            highlight && user.isOldest ? 'bg-yellow-50' : 'bg-inherit'
+            highlight && user.isOldest ? 'bg-[#f4f4f4]' : 'bg-inherit'
           }`}
         >
-          <TableCell className="font-medium">{user.id}</TableCell>
+          <TableCell className="font-medium w-[85px]">{user.id}</TableCell>
           <TableCell>
-            <Avatar className="w-6 h-auto">
-              <AvatarImage src={user.image} />
-              <AvatarFallback>JD</AvatarFallback>
-            </Avatar>
-          </TableCell>
-          <TableCell className="font-medium">
-            {user.firstName} {user.lastName}
+            <p className="font-medium">
+              {user.firstName} {user.lastName}
+            </p>
+            <p className="text-neutral-500">{user.email}</p>
           </TableCell>
           <TableCell>{user.address.city}</TableCell>
           <TableCell>{user.address.state}</TableCell>

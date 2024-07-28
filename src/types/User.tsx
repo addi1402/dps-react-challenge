@@ -9,6 +9,7 @@ export default interface User {
   birthDate: string;
   image: string | undefined;
   isOldest?: boolean;
+  email:string;
 }
 
 export interface UserState {
