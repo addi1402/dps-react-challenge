@@ -39,6 +39,23 @@ const initialState: UserState = {
   highlight: false,
 };
 
+const calculateOldest = (users: User[]) => {
+  const oldestPerCity: Record<string, Date> = {};
+  users.forEach((user) => {
+    const city = user.address.city;
+    const birthDate = new Date(user.birthDate);
+    if (!oldestPerCity[city] || birthDate < oldestPerCity[city]) {
+      oldestPerCity[city] = birthDate;
+    }
+  });
+  return users.map((user) => ({
+    ...user,
+    isOldest:
+      new Date(user.birthDate).getTime() ===
+      oldestPerCity[user.address.city].getTime(),
+  }));
+};
+
 export const fetchUsers = createAsyncThunk<
   User[],
   void,
@@ -65,7 +82,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     applyFilters: (state) => {
-      state.searchResults = state.userData.filter((user) => {
+      let filteredUsers = state.userData.filter((user) => {
         const cityMatch =
           state.currentFilters.city === '' ||
           state.currentFilters.city === 'All Cities' ||
@@ -82,6 +99,10 @@ const userSlice = createSlice({
 
         return cityMatch && nameMatch;
       });
+
+      state.searchResults = state.highlight
+        ? calculateOldest(filteredUsers)
+        : filteredUsers;
     },
     cityFilter: (state, action: PayloadAction<string>) => {
       state.currentFilters.city = action.payload;
@@ -93,24 +114,12 @@ const userSlice = createSlice({
     },
     toggleHighlight: (state) => {
       state.highlight = !state.highlight;
+      state.searchResults = state.highlight
+        ? calculateOldest(state.searchResults)
+        : state.searchResults.map((user) => ({ ...user, isOldest: false }));
     },
     calculateOldestPerCity: (state) => {
-      const oldestPerCity: Record<string, Date> = {};
-      state.searchResults.forEach((user) => {
-        const city = user.address.city;
-        const birthDate = new Date(user.birthDate);
-
-        if (!oldestPerCity[city] || birthDate < oldestPerCity[city]) {
-          oldestPerCity[city] = birthDate;
-        }
-      });
-
-      state.searchResults = state.searchResults.map((user) => ({
-        ...user,
-        isOldest:
-          new Date(user.birthDate).getTime() ===
-          oldestPerCity[user.address.city].getTime(),
-      }));
+      state.searchResults = calculateOldest(state.searchResults);
     },
   },
   extraReducers: (builder) => {
@@ -123,7 +132,9 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.userData = action.payload;
-        state.searchResults = action.payload;
+        state.searchResults = state.highlight
+          ? calculateOldest(action.payload)
+          : action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.error = action.payload ?? 'An error occurred';

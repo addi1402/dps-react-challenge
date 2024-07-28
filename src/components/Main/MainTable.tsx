@@ -49,7 +49,7 @@ const MainTable: React.FC = () => {
   return (
     <Table>
       <TableCaption>
-        <span>{searchResults.length}</span> Search Results
+        Results Found: <span>{searchResults.length}</span>
       </TableCaption>
       <TableHeader>
         <TableRow>
@@ -73,7 +73,7 @@ const MainTable: React.FC = () => {
             <TableCell className="font-medium">
               <Avatar className="w-6 h-auto">
                 <AvatarImage src={user.image} />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>JD</AvatarFallback>
               </Avatar>
             </TableCell>
             <TableCell>
