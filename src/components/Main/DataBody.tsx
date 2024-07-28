@@ -20,15 +20,15 @@ export default function DataBody({ searchResults, highlight }: DataBodyProps) {
             highlight && user.isOldest ? 'bg-[#f4f4f4]' : 'bg-inherit'
           }`}
         >
-          <TableCell className="font-medium w-[85px]">{user.id}</TableCell>
+          <TableCell className="font-medium pr-0">{user.id}</TableCell>
           <TableCell>
             <p className="font-medium">
               {user.firstName} {user.lastName}
             </p>
-            <p className="text-neutral-500">{user.email}</p>
+            <p className="text-neutral-500 text-sm">{user.email}</p>
           </TableCell>
           <TableCell>{user.address.city}</TableCell>
-          <TableCell>{user.address.state}</TableCell>
+          <TableCell className="pr-0">{user.address.state}</TableCell>
           <TableCell>{formatDate(user.birthDate)}</TableCell>
         </TableRow>
       ))}

@@ -42,7 +42,6 @@ export const fetchUsers = createAsyncThunk<
   } catch (err) {
     if (axios.isAxiosError(err)) {
       if (!err.response) {
-        // If there is no response from the server - No internet connection
         return rejectWithValue(
           'No internet connection. Please check your network and try again.'
         );
@@ -82,9 +81,19 @@ const userSlice = createSlice({
         return cityMatch && nameMatch;
       });
 
-      state.searchResults = state.highlight
-        ? calculateOldest(filteredUsers)
-        : filteredUsers;
+      // state.searchResults = state.highlight
+      //   ? calculateOldest(filteredUsers)
+      //   : filteredUsers;
+      if (state.highlight) {
+        const oldestUsers = calculateOldest(state.userData);
+        state.searchResults = filteredUsers.map((user) => ({
+          ...user,
+          isOldest:
+            oldestUsers.find((u) => u.id === user.id)?.isOldest || false,
+        }));
+      } else {
+        state.searchResults = filteredUsers;
+      }
     },
     cityFilter: (state, action: PayloadAction<string>) => {
       state.currentFilters.city = action.payload;
@@ -96,12 +105,19 @@ const userSlice = createSlice({
     },
     toggleHighlight: (state) => {
       state.highlight = !state.highlight;
-      state.searchResults = state.highlight
-        ? calculateOldest(state.searchResults)
-        : state.searchResults.map((user) => ({ ...user, isOldest: false }));
-    },
-    calculateOldestPerCity: (state) => {
-      state.searchResults = calculateOldest(state.searchResults);
+      if (state.highlight) {
+        const oldestUsers = calculateOldest(state.userData);
+        state.searchResults = state.searchResults.map((user) => ({
+          ...user,
+          isOldest:
+            oldestUsers.find((u) => u.id === user.id)?.isOldest || false,
+        }));
+      } else {
+        state.searchResults = state.searchResults.map((user) => ({
+          ...user,
+          isOldest: false,
+        }));
+      }
     },
   },
   extraReducers: (builder) => {
@@ -126,9 +142,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {
-  cityFilter,
-  nameFilter,
-  toggleHighlight,
-  calculateOldestPerCity,
-} = userSlice.actions;
+export const { cityFilter, nameFilter, toggleHighlight } = userSlice.actions;

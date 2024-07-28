@@ -29,7 +29,7 @@ export default function Dropdown() {
 
   return (
     <Select onValueChange={handleCityChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="min-w-16 max-w-[130px]">
         <SelectValue placeholder={currentCity} />
       </SelectTrigger>
       <SelectContent>

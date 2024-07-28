@@ -1,8 +1,13 @@
 #root {
-  width: 70%;
-  min-width: 1024px;
+  width: 60%;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0rem;
+}
+@media (min-width: 360px) and (max-width: 1179px) {
+  #root{
+    width: 100%;
+  }
 }
 
 /* Logo Styles */

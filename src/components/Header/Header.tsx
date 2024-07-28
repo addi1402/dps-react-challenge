@@ -11,7 +11,7 @@ export default function Header() {
           Access Comprehensive Customer Details
         </p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <SearchBar />
         <div className="flex gap-4 items-center">
           <Dropdown />
