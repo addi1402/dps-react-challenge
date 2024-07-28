@@ -1,6 +1,7 @@
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import User from '@/types/User';
+import DataBodyProps from '@/types/Data';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -8,11 +9,6 @@ function formatDate(dateString: string): string {
   const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() returns month from 0-11
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
-}
-
-interface DataBodyProps {
-  searchResults: User[];
-  highlight: boolean;
 }
 
 export default function DataBody({ searchResults, highlight }: DataBodyProps) {
@@ -32,7 +28,7 @@ export default function DataBody({ searchResults, highlight }: DataBodyProps) {
               <AvatarFallback>JD</AvatarFallback>
             </Avatar>
           </TableCell>
-          <TableCell className='font-medium'>
+          <TableCell className="font-medium">
             {user.firstName} {user.lastName}
           </TableCell>
           <TableCell>{user.address.city}</TableCell>

@@ -49,21 +49,19 @@ The attached mockup image has been referred to guide the UI development 👇
 - [x] Highlight Oldest User per city Checkbox
 - [ ] Pagination Component
 - [x] Clear All Filters Button
-- [ ] User Details Modal on Row Click
 - [ ] Responsive Design
 
 ## Error Handling Implementation
 
 - [ ] API Request Failures (Display user-friendly messages)
-- [ ] No Results after applying Filters
+- [x] No Results after applying Filters
 - [ ] Invalid Fields in API Response
 - [ ] Network Connectivity Issues (Implement Retry Mechanism)
 - [x] General API Fetch Error Handling
 
 ## Minor Detailing
 
-- [ ] Skeleton Loaders for Initial Data Fetch + Filtering
-- [ ] Tooltips for clarifying UI elements
+- [x] Skeleton Loaders for Initial Data Fetch
 - [x] Non-draggable Images
 - [x] Disable Text Selection
 

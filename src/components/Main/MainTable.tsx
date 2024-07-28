@@ -34,7 +34,13 @@ const MainTable: React.FC = () => {
   return (
     <Table>
       <TableCaption>
-        Results Found: <span>{searchResults.length}</span>
+        {searchResults.length > 0 ? (
+          <>
+            Results Found: <span>{searchResults.length}</span>
+          </>
+        ) : (
+          'No Results Found'
+        )}
       </TableCaption>
       <TableHeader>
         <TableRow>
