@@ -25,7 +25,7 @@ interface User {
 }
 
 const MainTable: React.FC = () => {
-  const { userData } = useSelector((state: RootState) => state.users);
+  const { searchResults } = useSelector((state: RootState) => state.users);
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -38,7 +38,7 @@ const MainTable: React.FC = () => {
   return (
     <Table>
       <TableCaption>
-        <span>{userData.length}</span> Search Results
+        <span>{searchResults.length}</span> Search Results
       </TableCaption>
       <TableHeader>
         <TableRow>
@@ -51,7 +51,7 @@ const MainTable: React.FC = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {userData.map((user: User) => (
+        {searchResults.map((user: User) => (
           <TableRow key={user.id}>
             <TableCell className="font-medium">{user.id}</TableCell>
             <TableCell className="font-medium">

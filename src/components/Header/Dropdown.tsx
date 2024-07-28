@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Select,
   SelectContent,
@@ -6,11 +6,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { RootState } from '@/redux/store';
-import { useMemo } from 'react';
+import { RootState, AppDispatch } from '@/redux/store';
+import { useMemo, useState } from 'react';
+import { cityFilter } from '@/redux/slices/userSlice';
 
 export default function Dropdown() {
+  const dispatch = useDispatch<AppDispatch>();
   const { userData } = useSelector((state: RootState) => state.users);
+  const [currentCity, setCurrentCity] = useState<string>('All Cities');
+
   const cities = useMemo(() => {
     const uniqueCities = [
       ...new Set(userData.map((user) => user.address.city)),
@@ -18,10 +22,15 @@ export default function Dropdown() {
     return ['All Cities', ...uniqueCities].sort();
   }, [userData]);
 
+  const handleCityChange = (city: string) => {
+    setCurrentCity(city);
+    dispatch(cityFilter(city === 'All Cities' ? '' : city));
+  };
+
   return (
-    <Select>
+    <Select onValueChange={handleCityChange}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="All Cities" />
+        <SelectValue placeholder={currentCity} />
       </SelectTrigger>
       <SelectContent>
         {cities.map((city) => (
