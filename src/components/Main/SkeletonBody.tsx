@@ -9,10 +9,10 @@ export default function SkeletonBody() {
           <TableCell>
             <Skeleton className="w-5 h-5" />
           </TableCell>
-          <TableCell className='w-[100px]'>
+          <TableCell className="w-[100px]">
             <Skeleton className="w-6 h-6 rounded-full" />
           </TableCell>
-          <TableCell className='w-[180px]'>
+          <TableCell className="w-[180px]">
             <Skeleton className="w-full h-4" />
           </TableCell>
           <TableCell>

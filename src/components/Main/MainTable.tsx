@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import { calculateOldestPerCity } from '@/redux/slices/userSlice';
 import SkeletonBody from './SkeletonBody';
 import DataBody from './DataBody';
 
-const MainTable: React.FC = () => {
+export default function MainTable() {
   const { searchResults, highlight, loading, error } = useSelector(
     (state: RootState) => state.users
   );
@@ -61,6 +61,4 @@ const MainTable: React.FC = () => {
       </TableBody>
     </Table>
   );
-};
-
-export default MainTable;
+}

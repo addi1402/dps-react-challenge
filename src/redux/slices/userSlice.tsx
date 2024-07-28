@@ -64,14 +64,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     applyFilters: (state) => {
-      let filteredUsers = state.userData.filter((user) => {
+      const filteredUsers = state.userData.filter((user) => {
         const cityMatch =
-          state.currentFilters.city === '' ||
+          !state.currentFilters.city ||
           state.currentFilters.city === 'All Cities' ||
           user.address.city === state.currentFilters.city;
 
         const nameMatch =
-          state.currentFilters.name === '' ||
+          !state.currentFilters.name ||
           user.firstName
             .toLowerCase()
             .includes(state.currentFilters.name.toLowerCase()) ||
