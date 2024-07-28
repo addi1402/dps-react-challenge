@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useSelector } from 'react-redux';
 
 const invoices = [
   {
@@ -91,37 +92,37 @@ const invoices = [
 ];
 
 export default function MainTable() {
+  const { userData } = useSelector((state) => state.users);
+
   return (
     <Table className="mb-3">
       <TableCaption>
-        <span>{invoices.length}</span> Search Results
+        <span>{userData.length}</span> Search Results
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead>Nothing</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead className="w-[100px]">ID</TableHead>
+          <TableHead>Image</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>City</TableHead>
+          <TableHead>State</TableHead>
+          <TableHead>Birthday</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {userData.map((user) => (
+          <TableRow key={user.id}>
+            <TableCell className="font-medium">{user.id}</TableCell>
+            <TableCell className="font-medium">{user.id}</TableCell>
+            <TableCell>
+              {user.firstName} {user.lastName}
+            </TableCell>
+            <TableCell>{user.address.city}</TableCell>
+            <TableCell>{user.address.state}</TableCell>
+            <TableCell>{user.birthDate}</TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={4}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 }
