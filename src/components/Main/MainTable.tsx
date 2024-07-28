@@ -65,9 +65,9 @@ const MainTable: React.FC = () => {
         {searchResults.map((user: User) => (
           <TableRow
             key={user.id}
-            className={
+            className={`transition-colors duration-300 ${
               highlight && user.isOldest ? 'bg-yellow-50' : 'bg-inherit'
-            }
+            }`}
           >
             <TableCell className="font-medium">{user.id}</TableCell>
             <TableCell className="font-medium">

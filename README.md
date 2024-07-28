@@ -43,16 +43,14 @@ The attached mockup image has been referred to guide the UI development 👇
 
 ## Challenge Features
 
-- [ ] Input Filter on `firstName` and `lastName` (Dynamic + Case Sensitive)
-- [ ] Implement a 1-second debounce on the Name Filter
-- [ ] City Dropdown Filter
-- [ ] Highlight Oldest User per city Checkbox
-- [ ] Sortable Columns
+- [x] Input Filter on `firstName` and `lastName` (Dynamic + Case Sensitive)
+- [x] Implement a 1-second debounce on the Name Filter
+- [x] City Dropdown Filter
+- [x] Highlight Oldest User per city Checkbox
 - [ ] Pagination Component
-- [ ] Clear All Filters Button
+- [x] Clear All Filters Button
 - [ ] User Details Modal on Row Click
 - [ ] Responsive Design
-- [ ] Key connectivity to Name Filter
 
 ## Error Handling Implementation
 
@@ -60,21 +58,11 @@ The attached mockup image has been referred to guide the UI development 👇
 - [ ] No Results after applying Filters
 - [ ] Invalid Fields in API Response
 - [ ] Network Connectivity Issues (Implement Retry Mechanism)
-- [ ] Empty Dataset from API
-- [ ] General API Fetch Error Handling
-
-## Edge Cases Considered
-
-- [ ] Cities with Identical Names but different States
-- [ ] Users with same Birthday in same City
-- [ ] Filtering/Sorting with missing data
-- [ ] Very few records after applying Filters
-- [ ] Identical oldest users in a city (multiple users with same oldest birthday)
+- [x] General API Fetch Error Handling
 
 ## Minor Detailing
 
 - [ ] Skeleton Loaders for Initial Data Fetch + Filtering
-- [ ] Toast Notifications for successful actions
 - [ ] Tooltips for clarifying UI elements
 - [x] Non-draggable Images
 - [x] Disable Text Selection

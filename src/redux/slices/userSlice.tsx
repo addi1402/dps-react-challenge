@@ -66,9 +66,16 @@ export const fetchUsers = createAsyncThunk<
     return response.data.users;
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      return rejectWithValue(
-        `Failed to fetch users: ${err.response?.data?.message || err.message}`
-      );
+      if (!err.response) {
+        // If there is no response from the server - No internet connection
+        return rejectWithValue(
+          'No internet connection. Please check your network and try again.'
+        );
+      } else {
+        return rejectWithValue(
+          `Failed to fetch users: ${err.response?.data?.message || err.message}`
+        );
+      }
     } else {
       return rejectWithValue(
         `Failed to fetch users: ${(err as Error).message}`
