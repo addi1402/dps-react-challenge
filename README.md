@@ -75,10 +75,9 @@ The attached mockup image has been referred to guide the UI development 👇
 
 - [ ] Skeleton Loaders for Initial Data Fetch + Filtering
 - [ ] Toast Notifications for successful actions
-- [ ] Clear visual indication of Active Filters
 - [ ] Tooltips for clarifying UI elements
-- [ ] Non-draggable Images
-- [ ] Disable Text Selection
+- [x] Non-draggable Images
+- [x] Disable Text Selection
 
 ## Additional Notes
 
