@@ -6,6 +6,7 @@ interface User {
   firstName: string;
   lastName: string;
   birthDate: string;
+  image:string;
   address: {
     city: string;
     state: string;
