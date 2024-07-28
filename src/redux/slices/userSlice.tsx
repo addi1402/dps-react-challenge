@@ -95,16 +95,21 @@ const userSlice = createSlice({
       state.highlight = !state.highlight;
     },
     calculateOldestPerCity: (state) => {
-      const oldestPerCity: Record<string, number> = {};
+      const oldestPerCity: Record<string, Date> = {};
       state.searchResults.forEach((user) => {
         const city = user.address.city;
-        if (!oldestPerCity[city] || user.age > oldestPerCity[city]) {
-          oldestPerCity[city] = user.age;
+        const birthDate = new Date(user.birthDate);
+
+        if (!oldestPerCity[city] || birthDate < oldestPerCity[city]) {
+          oldestPerCity[city] = birthDate;
         }
       });
+
       state.searchResults = state.searchResults.map((user) => ({
         ...user,
-        isOldest: user.age === oldestPerCity[user.address.city],
+        isOldest:
+          new Date(user.birthDate).getTime() ===
+          oldestPerCity[user.address.city].getTime(),
       }));
     },
   },
