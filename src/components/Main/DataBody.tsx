@@ -17,7 +17,7 @@ export default function DataBody({ searchResults, highlight }: DataBodyProps) {
         <TableRow
           key={user.id}
           className={`transition-colors duration-300 ${
-            highlight && user.isOldest ? 'bg-[#f4f4f4]' : 'bg-inherit'
+            highlight && user.isOldest ? 'bg-[#00000011]' : 'bg-inherit'
           }`}
         >
           <TableCell className="font-medium pr-0">{user.id}</TableCell>

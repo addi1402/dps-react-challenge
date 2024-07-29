@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Input } from '../ui/input';
+import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
 import { AppDispatch } from '@/redux/store';
 import { nameFilter } from '@/redux/slices/userSlice';

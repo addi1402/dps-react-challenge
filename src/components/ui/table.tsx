@@ -103,7 +103,7 @@ const TableCaption = React.forwardRef<
   <caption
     ref={ref}
     className={cn(
-      'py-2 rounded-b-xl text-sm text-neutral-500 font-medium border-t dark:text-neutral-400',
+      'py-2 rounded-b-xl text-sm text-neutral-500 font-medium dark:text-neutral-400',
       className
     )}
     {...props}

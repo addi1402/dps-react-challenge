@@ -5,9 +5,15 @@
   padding: 0rem;
 }
 @media (min-width: 360px) and (max-width: 1179px) {
-  #root{
+  #root {
     width: 100%;
   }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Logo Styles */

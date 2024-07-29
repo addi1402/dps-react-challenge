@@ -7,9 +7,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import SkeletonBody from './SkeletonBody';
-import DataBody from './DataBody';
+import { RootState } from '@/redux/store';
+import SkeletonBody from '@/components/Main/SkeletonBody';
+import DataBody from '@/components/Main/DataBody';
 
 export default function MainTable() {
   const { searchResults, highlight, loading, error } = useSelector(
@@ -24,7 +24,7 @@ export default function MainTable() {
 
   return (
     <Table>
-      <TableCaption>
+      <TableCaption className={searchResults.length > 0 ? 'border-t' : ''}>
         {searchResults.length > 0 ? (
           <>
             Found <span>{searchResults.length}</span> Results

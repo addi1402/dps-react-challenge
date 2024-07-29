@@ -1,6 +1,6 @@
-import Dropdown from './Dropdown';
-import SearchBar from './SearchBar';
-import Tickbox from './Tickbox';
+import Dropdown from '@/components/Header/Dropdown';
+import SearchBar from '@/components/Header/SearchBar';
+import Tickbox from '@/components/Header/Tickbox';
 
 export default function Header() {
   return (

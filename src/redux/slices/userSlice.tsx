@@ -80,10 +80,6 @@ const userSlice = createSlice({
 
         return cityMatch && nameMatch;
       });
-
-      // state.searchResults = state.highlight
-      //   ? calculateOldest(filteredUsers)
-      //   : filteredUsers;
       if (state.highlight) {
         const oldestUsers = calculateOldest(state.userData);
         state.searchResults = filteredUsers.map((user) => ({

@@ -1,4 +1,4 @@
-import dpsLogo from '../assets/DPS.svg';
+import dpsLogo from '@/assets/DPS.svg';
 
 export default function DPSLogo() {
   return (
